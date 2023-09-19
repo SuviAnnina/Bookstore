@@ -23,9 +23,9 @@ public class BookstoreApplication {
 	public CommandLineRunner bookDemo(BookRepository bookRepository) {
 		return (args) -> {
 			log.info("Save some books");
-			bookRepository.save(new Book("Kirja 1", 2005));
-			bookRepository.save(new Book("Kirja 2", 2022));
-			bookRepository.save(new Book("Kirja 3", 1998));
+			bookRepository.save(new Book("Pride and Prejudice", "Jane Austen", 1813, "978-0-13-468599-1", 19.90));
+			bookRepository.save(new Book("Frankenstein", "Mary Shelley", 1818, "978-1-4398-4092-3", 16.90));
+			bookRepository.save(new Book("To Kill a Mockingbird", "Harper Lee", 1960, "918-2-4398-9804-6", 21.50));
 
 			log.info("Fetch all books");
 			for (Book book : bookRepository.findAll()) {
