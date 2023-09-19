@@ -1,13 +1,43 @@
 package hh.sof003.bookstore.Domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private String title;
     private String author;
+
+    @Column(name = "release_year")
     private int year;
+
     private String isbn;
     private int price;
 
     public Book() {
+    }
+
+    public Book(long id) {
+        this.id = id;
+    }
+
+    public Book(long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    public Book(long id, String title, String author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
     }
 
     public Book(String title, String author) {
@@ -20,12 +50,17 @@ public class Book {
         this.year = year;
     }
 
-    public Book(String title, String author, int year, String isbn, int price) {
+    public Book(long id, String title, String author, int year, String isbn, int price) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
         this.isbn = isbn;
         this.price = price;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {
@@ -46,6 +81,10 @@ public class Book {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getTitle() {
