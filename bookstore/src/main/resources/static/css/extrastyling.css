@@ -1,0 +1,31 @@
+body {
+    background-color: #e6ede7;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-center {
+    display: flex;
+    justify-content: center;
+}
+
+label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 70px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+input {
+    display: inline-block;
+    float: left;
+    margin-top: 10px;
+}

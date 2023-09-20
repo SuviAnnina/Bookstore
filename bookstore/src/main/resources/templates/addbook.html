@@ -4,20 +4,24 @@
 <head>
     <title>Bookstore</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/extrastyling.css" />
 </head>
 
 <body>
 
     <h1>Add a new book</h1>
-    <form th:object=${book} th:action="@{/save}" action="#" method="post">
-        <p>Title: <input type="text" th:field="${book.title}" /></p>
-        <p>Author: <input type="text" th:field="${book.author}" /></p>
-        <p>Year: <input type="text" th:field="${book.year}" /></p>
-        <p>Isbn: <input type="text" th:field="${book.isbn}" /></p>
-        <p>Price: <input type="text" th:field="${book.price}" /></p>
-        <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-    </form>
-
+    <div class="form-center">
+        <form th:object=${book} th:action="@{/save}" action="#" method="post">
+            <p><label>Title:</label><input type="text" th:field="${book.title}" /></p>
+            <p><label>Author:</label><input type="text" th:field="${book.author}" /></p>
+            <p><label>Year:</label><input type="text" th:field="${book.year}" /></p>
+            <p><label>Isbn:</label><input type="text" th:field="${book.isbn}" /></p>
+            <p><label>Price:</label><input type="text" th:field="${book.price}" /></p>
+            <input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset"
+                class="btn btn-primary" />
+        </form>
+    </div>
 </body>
 
 </html>
