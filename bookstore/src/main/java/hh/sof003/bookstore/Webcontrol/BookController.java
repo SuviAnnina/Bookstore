@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,6 +29,15 @@ public class BookController {
         return "redirect:/booklist";
     }
 
+    @GetMapping("/editbook/{id}")
+    public String editBook(@PathVariable("id") long bookId, Model model) {
+        Book book = bookRepository.findById(bookId).orElse(null);
+        if (book != null) {
+            model.addAttribute("book", book);
+        }
+        return "editbook";
+    }
+
     @GetMapping("/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
@@ -37,6 +47,24 @@ public class BookController {
     @PostMapping("/save")
     public String saveBook(Book book) {
         bookRepository.save(book);
+        return "redirect:/booklist";
+    }
+
+    @PostMapping("/update")
+    public String updateBook(@ModelAttribute("book") Book updatedBook) {
+        Long bookId = updatedBook.getId();
+        Book currentBook = bookRepository.findById(bookId).orElse(null);
+
+        if (currentBook != null) {
+            currentBook.setTitle(updatedBook.getTitle());
+            currentBook.setAuthor(updatedBook.getAuthor());
+            currentBook.setYear(updatedBook.getYear());
+            currentBook.setIsbn(updatedBook.getIsbn());
+            currentBook.setPrice(updatedBook.getPrice());
+
+            bookRepository.save(currentBook);
+        }
+
         return "redirect:/booklist";
     }
 
