@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import hh.sof003.bookstore.Domain.Book;
 import hh.sof003.bookstore.Domain.BookRepository;
+import hh.sof003.bookstore.Domain.CategoryRepository;
 
 @Controller
 public class BookController {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     /* Listaa kaikki tietokannasta löytyvät kirjat */
     @GetMapping("/booklist")
@@ -36,6 +40,7 @@ public class BookController {
         Book book = bookRepository.findById(bookId).orElse(null);
         if (book != null) {
             model.addAttribute("book", book);
+            model.addAttribute("categories", categoryRepository.findAll());
         }
         return "editbook";
     }
@@ -44,6 +49,7 @@ public class BookController {
     @GetMapping("/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
     }
 
@@ -66,6 +72,7 @@ public class BookController {
             currentBook.setYear(updatedBook.getYear());
             currentBook.setIsbn(updatedBook.getIsbn());
             currentBook.setPrice(updatedBook.getPrice());
+            currentBook.setCategory(updatedBook.getCategory());
 
             bookRepository.save(currentBook);
         }
