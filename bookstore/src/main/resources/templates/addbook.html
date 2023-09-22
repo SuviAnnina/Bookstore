@@ -18,8 +18,15 @@
             <p><label>Year:</label><input type="text" th:field="${book.year}" /></p>
             <p><label>Isbn:</label><input type="text" th:field="${book.isbn}" /></p>
             <p><label>Price:</label><input type="text" th:field="${book.price}" /></p>
-            <input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset"
-                class="btn btn-primary" />
+            <!-- <p><label>Category:</label><input type="text" th:field="${book.category}" /></p> -->
+            <p>
+                <input type="submit" value="Submit" class="btn btn-primary" />
+                <input type="reset" value="Reset" class="btn btn-primary" />
+            </p>
+
+            <p>
+                <a href="/booklist" class="btn btn-primary">Back to booklist</a>
+            </p>
         </form>
     </div>
 </body>
