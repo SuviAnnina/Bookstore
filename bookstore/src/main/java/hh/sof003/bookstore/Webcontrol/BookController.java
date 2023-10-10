@@ -1,6 +1,7 @@
 package hh.sof003.bookstore.Webcontrol;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class BookController {
 
     /* Poistaa valitun kirjan id:n perusteella tietokannasta */
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteBook(@PathVariable("id") long bookId, Model model) {
         bookRepository.deleteById(bookId);
         return "redirect:/booklist";
