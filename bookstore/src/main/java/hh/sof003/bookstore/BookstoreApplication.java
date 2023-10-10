@@ -11,6 +11,8 @@ import hh.sof003.bookstore.Domain.Book;
 import hh.sof003.bookstore.Domain.BookRepository;
 import hh.sof003.bookstore.Domain.Category;
 import hh.sof003.bookstore.Domain.CategoryRepository;
+import hh.sof003.bookstore.Domain.User;
+import hh.sof003.bookstore.Domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -22,7 +24,8 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository,
+			UserRepository userRepository) {
 		return (args) -> {
 			log.info("Save some categories");
 			Category category1 = new Category("Drama");
@@ -54,6 +57,27 @@ public class BookstoreApplication {
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());
 			}
+
+			log.info("Save some users");
+
+			// Hertta / queen0Fhearts
+			User user1 = new User("Hertta", "$2a$10$uZyuzJuxKK394drd2JxS1ubkfBvAQdlGhEEoVUTzcgkJxEYXWUbSC", "USER",
+					"hertta@hertta.com");
+
+			// Tessa / mlemTILLn0END
+			User user2 = new User("Tessa", "$2a$10$5mKSQ1Zq8PxA2S9l9PcjaOzWcojaM47XLmZtzVBEZOPFLfHACE9.e", "USER",
+					"tessa@tessa.fi");
+
+			// Admin / adminsGONNA_adm1N
+			User user3 = new User("Admin", "$2a$10$4CqqaxPe5SRF6K//Qq4zP.vsa3DS4T/VYX9rzWPq0yg2y7qsjbEOu", "ADMIN",
+					"admin@admin.net");
+
+			userRepository.save(user1);
+			userRepository.save(user2);
+			userRepository.save(user3);
+
+			log.info("we have users!");
+
 		};
 	}
 
